@@ -3,6 +3,22 @@
 A cross-platform installer that configures web browsers to use system DNS settings by disabling DNS-over-HTTPS (DoH). This ensures network administrators can enforce DNS policies, enable content filtering, and resolve internal DNS names properly.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Release](https://img.shields.io/github/v/release/Kiira-Motors-Corporation/browser-dns-policy)](https://github.com/Kiira-Motors-Corporation/browser-dns-policy/releases/latest)
+
+## 📥 Download
+
+**Latest Release:** [v1.0.0](https://github.com/Kiira-Motors-Corporation/browser-dns-policy/releases/latest)
+
+| Platform | Download | Status |
+|----------|----------|--------|
+| Windows (11) | [BrowserDNSInstaller.msi](https://github.com/Kiira-Motors-Corporation/browser-dns-policy/releases/download/v1.0.0/BrowserDNSInstaller.msi) | ✅ Tested |
+| Ubuntu/Debian | [kmc-browser-dns-policy_1.0.0.deb](https://github.com/Kiira-Motors-Corporation/browser-dns-policy/releases/download/v1.0.0/kmc-browser-dns-policy_1.0.0.deb) | ⚠️ Untested |
+| RHEL/CentOS/Fedora | [kmc-browser-dns-policy-1.0.0-1.noarch.rpm](https://github.com/Kiira-Motors-Corporation/browser-dns-policy/releases/download/v1.0.0/kmc-browser-dns-policy-1.0.0-1.noarch.rpm) | ⚠️ Untested |
+| macOS | Not yet available | 🚧 Coming soon |
+
+**Note:** The Windows installer has been tested on Windows 11. Linux and macOS installers are provided but have not been tested yet. Feedback welcome!
+
+---
 
 ## Overview
 
@@ -18,9 +34,9 @@ This installer automatically configures popular web browsers to trust and use th
 - Chromium (Linux only)
 
 **Supported Platforms**:
-- Windows (10/11, Server 2016+)
-- Linux (Debian/Ubuntu, Red Hat/CentOS/Fedora)
-- macOS (10.15+)
+- Windows (10/11, Server 2016+) - ✅ Tested on Windows 11
+- Linux (Debian/Ubuntu, Red Hat/CentOS/Fedora) - ⚠️ Untested
+- macOS (10.15+) - 🚧 Coming soon
 
 ---
 
@@ -28,10 +44,12 @@ This installer automatically configures popular web browsers to trust and use th
 
 ### Windows Installation
 
-**File**: [BrowserDNSInstaller.msi](/Windows/BrowserDNSInstaller.msi) (located in `Windows/` folder)
+**File**: [BrowserDNSInstaller.msi](https://github.com/Kiira-Motors-Corporation/browser-dns-policy/releases/download/v1.0.0/BrowserDNSInstaller.msi)
+
+**Tested on:** Windows 11 ✅
 
 #### Standard Installation
-1. Download [BrowserDNSInstaller.msi](/Windows/BrowserDNSInstaller.msi)
+1. Download [BrowserDNSInstaller.msi](https://github.com/Kiira-Motors-Corporation/browser-dns-policy/releases/download/v1.0.0/BrowserDNSInstaller.msi)
 2. Double-click the file
 3. Click "Next" through the installation wizard
 4. Restart your browsers (Chrome, Edge, Brave, Opera, Vivaldi, Firefox)
@@ -53,9 +71,11 @@ msiexec /i BrowserDNSInstaller.msi /qn
 
 ### Linux Installation
 
+**⚠️ Note:** Linux installers have not been tested yet. Feedback and testing reports are welcome!
+
 #### Debian/Ubuntu (.deb)
 
-**File**: [kmc-browser-dns-policy_1.0.0.deb](/Linux/kmc-browser-dns-policy_1.0.0.deb) (located in `Linux/` folder)
+**File**: [kmc-browser-dns-policy_1.0.0.deb](https://github.com/Kiira-Motors-Corporation/browser-dns-policy/releases/download/v1.0.0/kmc-browser-dns-policy_1.0.0.deb)
 
 **Installation**:
 ```bash
@@ -69,7 +89,7 @@ sudo dpkg -r kmc-browser-dns-policy
 
 #### Red Hat/CentOS/Fedora (.rpm)
 
-**File**: [kmc-browser-dns-policy-1.0.0-1.noarch.rpm](/Linux/kmc-browser-dns-policy-1.0.0-1.noarch.rpm) (located in `Linux/` folder)
+**File**: [kmc-browser-dns-policy-1.0.0-1.noarch.rpm](https://github.com/Kiira-Motors-Corporation/browser-dns-policy/releases/download/v1.0.0/kmc-browser-dns-policy-1.0.0-1.noarch.rpm)
 
 **Installation**:
 ```bash
@@ -87,29 +107,9 @@ sudo rpm -e kmc-browser-dns-policy
 
 ### macOS Installation
 
-**File**: `KMC-Browser-DNS-Policy-1.0.0.pkg` (located in `MacOS/` folder)
+**🚧 Coming Soon:** The macOS installer is currently under development and not yet available.
 
-#### GUI Installation
-1. Download `KMC-Browser-DNS-Policy-1.0.0.pkg`
-2. Double-click the file
-3. Follow the installation wizard
-4. Enter your password when prompted
-5. Restart your browsers (Chrome, Edge, Brave, Vivaldi, Firefox)
-
-#### Command Line Installation
-```bash
-sudo installer -pkg KMC-Browser-DNS-Policy-1.0.0.pkg -target /
-```
-
-#### Uninstallation
-macOS doesn't have a built-in uninstaller. To remove manually:
-```bash
-sudo rm -rf "/Library/Google/Chrome/policies"
-sudo rm -rf "/Library/Microsoft/Edge/policies"
-sudo rm -rf "/Library/Application Support/BraveSoftware/Brave-Browser/policies"
-sudo rm -rf "/Library/Application Support/Vivaldi/policies"
-sudo rm -rf "/Library/Application Support/Mozilla/Firefox/distribution/policies.json"
-```
+Check the [releases page](https://github.com/Kiira-Motors-Corporation/browser-dns-policy/releases) for updates.
 
 ---
 
@@ -205,6 +205,8 @@ sudo alien -r kmc-browser-dns-policy_1.0.0.deb
 
 #### macOS Build
 
+**🚧 Status:** macOS installer not yet available
+
 **Location**: `MacOS/` folder
 
 **Files**:
@@ -218,6 +220,8 @@ chmod +x build-macos-pkg.sh
 ```
 
 **Output**: `KMC-Browser-DNS-Policy-1.0.0.pkg`
+
+**Note:** Build script is provided but the installer has not been built or tested yet.
 
 ---
 
@@ -399,6 +403,8 @@ Copyright (c) 2025 Kiira Motors Corporation
 
 ### Version 1.0.0 (2025-11-28)
 - Initial release
-- Support for Windows, Linux, and macOS
+- ✅ Windows support (tested on Windows 11)
+- ⚠️ Linux support (untested - .deb and .rpm packages available)
+- 🚧 macOS support (coming soon)
 - Support for Chrome, Edge, Firefox, Brave, Vivaldi, Opera, Chromium
 - Cross-platform DNS policy enforcement
