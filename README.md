@@ -1,4 +1,28 @@
-# Browser DNS Policy - Installation & Build Guide
+# Browser DNS Policy Installer
+
+A cross-platform installer that configures web browsers to use system DNS settings by disabling DNS-over-HTTPS (DoH). This ensures network administrators can enforce DNS policies, enable content filtering, and resolve internal DNS names properly.
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+## Overview
+
+This installer automatically configures popular web browsers to trust and use the operating system's DNS server configuration instead of using their built-in DNS-over-HTTPS features.
+
+**Supported Browsers**:
+- Google Chrome
+- Microsoft Edge
+- Mozilla Firefox
+- Brave Browser
+- Vivaldi
+- Opera (Windows only)
+- Chromium (Linux only)
+
+**Supported Platforms**:
+- Windows (10/11, Server 2016+)
+- Linux (Debian/Ubuntu, Red Hat/CentOS/Fedora)
+- macOS (10.15+)
+
+---
 
 ## Installation Instructions
 
@@ -127,7 +151,7 @@ After installation, verify that policies are applied:
 
 ### Build Instructions
 
-### Windows Build
+#### Windows Build
 
 **Location**: `Windows/` folder
 
@@ -145,7 +169,7 @@ wix build Product.wxs -ext WixToolset.Util.wixext -o BrowserDNSInstaller.msi
 
 ---
 
-### Linux Build
+#### Linux Build
 
 **Location**: `Linux/` folder
 
@@ -179,7 +203,7 @@ sudo alien -r kmc-browser-dns-policy_1.0.0.deb
 
 ---
 
-### macOS Build
+#### macOS Build
 
 **Location**: `MacOS/` folder
 
@@ -297,20 +321,84 @@ This installer configures popular web browsers to disable DNS-over-HTTPS (DoH) a
 - Internal DNS names resolve properly
 - DNS traffic goes through your organization's DNS servers
 
-**Supported Browsers**:
-- Google Chrome
-- Microsoft Edge
-- Mozilla Firefox
-- Brave Browser
-- Vivaldi
-- Opera (Windows only)
-- Chromium (Linux only)
+---
+
+## Repository Structure
+
+```
+.
+├── Windows/
+│   ├── Product.wxs
+│   ├── firefox-policies.json
+│   └── BrowserDNSInstaller.msi
+├── Linux/
+│   ├── build-deb.sh
+│   ├── kmc-browser-dns-policy_1.0.0.deb
+│   └── kmc-browser-dns-policy-1.0.0-1.noarch.rpm
+├── MacOS/
+│   ├── build-macos-pkg.sh
+│   └── KMC-Browser-DNS-Policy-1.0.0.pkg
+├── LICENSE
+└── README.md
+```
+
+---
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+### What This Means
+
+- ✅ Free to use for any purpose (personal, commercial, educational)
+- ✅ Free to modify and distribute
+- ✅ Can be included in proprietary software
+- ⚠️ Must include the original copyright notice
+- ⚠️ Provided "as-is" without warranty
+
+---
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request. For major changes, please open an issue first to discuss what you would like to change.
+
+### How to Contribute
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
 ---
 
 ## Support
 
 For issues or questions:
-- Check the browser's policy page to verify policies are loaded
-- Review the installation logs
-- Contact: support@kiiramotors.com
+- **GitHub Issues**: Report bugs or request features
+- **Email**: support@kiiramotors.com
+- **Documentation**: Check the browser's policy page to verify policies are loaded
+
+---
+
+## Acknowledgments
+
+- Built with [WiX Toolset](https://wixtoolset.org/) for Windows installers
+- Firefox policy configuration based on [Mozilla's Enterprise Policy Documentation](https://mozilla.github.io/policy-templates/)
+- Chromium-based browser policies based on [Chromium Enterprise Policy List](https://chromeenterprise.google/policies/)
+
+---
+
+## Copyright
+
+Copyright (c) 2025 Kiira Motors Corporation
+
+---
+
+## Changelog
+
+### Version 1.0.0 (2025-11-28)
+- Initial release
+- Support for Windows, Linux, and macOS
+- Support for Chrome, Edge, Firefox, Brave, Vivaldi, Opera, Chromium
+- Cross-platform DNS policy enforcement
