@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs"
+     xmlns:util="http://wixtoolset.org/schemas/v4/wxs/util">
+
+  <Package 
+      Name="KMC Browser DNS Policy"
+      Manufacturer="Kiira Motors Corporation"
+      Version="1.0.0.0"
+      UpgradeCode="09f89a11-3ed4-4d59-8f15-9ee2a14b0fd6">
+
+    <!-- Feature must be inside Package in WiX v4+ -->
+    <Feature Id="MainFeature" Title="KMC Browser DNS Policies" Level="1">
+      <ComponentGroupRef Id="BrowserPolicies"/>
+    </Feature>
+
+  </Package>
+
+  <!-- ==========================
+       Browser registry detection
+       ========================== -->
+  <Fragment>
+    <!-- Chrome detection - Result attribute instead of Type -->
+    <util:RegistrySearch 
+          Id="ChromeInstalled"
+          Root="HKLM"
+          Key="SOFTWARE\Google\Chrome"
+          Variable="ChromeInstalled"
+          Result="exists" />
+    
+    <!-- Edge detection -->
+    <util:RegistrySearch 
+          Id="EdgeInstalled"
+          Root="HKLM"
+          Key="SOFTWARE\Microsoft\Edge"
+          Variable="EdgeInstalled"
+          Result="exists" />
+
+    <!-- Brave detection -->
+    <util:RegistrySearch 
+          Id="BraveInstalled"
+          Root="HKLM"
+          Key="SOFTWARE\BraveSoftware\Brave-Browser"
+          Variable="BraveInstalled"
+          Result="exists" />
+
+    <!-- Opera detection -->
+    <util:RegistrySearch 
+          Id="OperaInstalled"
+          Root="HKLM"
+          Key="SOFTWARE\Opera Software"
+          Variable="OperaInstalled"
+          Result="exists" />
+
+    <!-- Vivaldi detection -->
+    <util:RegistrySearch 
+          Id="VivaldiInstalled"
+          Root="HKLM"
+          Key="SOFTWARE\Vivaldi"
+          Variable="VivaldiInstalled"
+          Result="exists" />
+
+    <!-- Firefox detection -->
+    <util:RegistrySearch 
+          Id="FirefoxInstalled"
+          Root="HKLM"
+          Key="SOFTWARE\Mozilla\Mozilla Firefox"
+          Variable="FirefoxInstalled"
+          Result="exists" />
+  </Fragment>
+
+  <!-- ==========================
+       Components for each browser
+       ========================== -->
+  <Fragment>
+    <ComponentGroup Id="BrowserPolicies">
+
+      <!-- Chrome Policies -->
+      <Component Id="ChromePolicies" Guid="9714a3d5-3a6b-4a4f-af2e-8b9dd18fa2d1"
+                 Directory="TARGETDIR"
+                 Condition="ChromeInstalled">
+        <RegistryValue 
+            Root="HKLM"
+            Key="SOFTWARE\Policies\Google\Chrome"
+            Name="DnsOverHttpsMode"
+            Type="string"
+            Value="off"
+            KeyPath="yes"/>
+        <RegistryValue 
+            Root="HKLM"
+            Key="SOFTWARE\Policies\Google\Chrome"
+            Name="BuiltInDnsClientEnabled"
+            Type="integer"
+            Value="0"/>
+      </Component>
+
+      <!-- Edge Policies -->
+      <Component Id="EdgePolicies" Guid="f31455b0-60c2-4b88-a67c-e875ecfa91f0"
+                 Directory="TARGETDIR"
+                 Condition="EdgeInstalled">
+        <RegistryValue Root="HKLM"
+            Key="SOFTWARE\Policies\Microsoft\Edge"
+            Name="DnsOverHttpsMode"
+            Type="string"
+            Value="off"
+            KeyPath="yes"/>
+        <RegistryValue Root="HKLM"
+            Key="SOFTWARE\Policies\Microsoft\Edge"
+            Name="BuiltInDnsClientEnabled"
+            Type="integer"
+            Value="0"/>
+      </Component>
+
+      <!-- Brave Policies -->
+      <Component Id="BravePolicies" Guid="7c5fc730-d3e4-4d97-85ae-0cc44fae0703"
+                 Directory="TARGETDIR"
+                 Condition="BraveInstalled">
+        <RegistryValue Root="HKLM"
+            Key="SOFTWARE\Policies\BraveSoftware\Brave"
+            Name="DnsOverHttpsMode"
+            Type="string"
+            Value="off"
+            KeyPath="yes"/>
+      </Component>
+
+      <!-- Opera Policies -->
+      <Component Id="OperaPolicies" Guid="d8a585d9-178e-41ab-b654-6721ada70c0b"
+                 Directory="TARGETDIR"
+                 Condition="OperaInstalled">
+        <RegistryValue Root="HKLM"
+            Key="SOFTWARE\Policies\Opera Software\Opera Stable"
+            Name="DnsOverHttpsMode"
+            Type="string"
+            Value="off"
+            KeyPath="yes"/>
+      </Component>
+
+      <!-- Vivaldi Policies -->
+      <Component Id="VivaldiPolicies" Guid="18b3a48f-8c81-4df0-a4c5-d059892a7bea"
+                 Directory="TARGETDIR"
+                 Condition="VivaldiInstalled">
+        <RegistryValue Root="HKLM"
+            Key="SOFTWARE\Policies\Vivaldi"
+            Name="DnsOverHttpsMode"
+            Type="string"
+            Value="off"
+            KeyPath="yes"/>
+      </Component>
+
+      <!-- Firefox Policies -->
+      <Component Id="FirefoxDNSPolicy" Guid="b5b15fb3-d02e-44e8-a5ae-dc9b53734146"
+                 Directory="FirefoxPoliciesDir"
+                 Condition="FirefoxInstalled">
+        <File Source="firefox-policies.json" Name="policies.json" KeyPath="yes"/>
+      </Component>
+
+    </ComponentGroup>
+  </Fragment>
+
+  <!-- Define directories for Firefox -->
+  <Fragment>
+    <StandardDirectory Id="ProgramFiles64Folder">
+      <Directory Id="MozillaDir" Name="Mozilla Firefox">
+        <Directory Id="FirefoxPoliciesDir" Name="distribution"/>
+      </Directory>
+    </StandardDirectory>
+  </Fragment>
+
+</Wix>
