@@ -9,6 +9,5 @@ logs/
 
 
 Windows/*.wixpdb
-Windows/*.cab
 
 Linux/kmc-browser-dns-policy_1.0.0/

@@ -6,7 +6,12 @@
       Name="KMC Browser DNS Policy"
       Manufacturer="Kiira Motors Corporation"
       Version="1.0.0.0"
-      UpgradeCode="09f89a11-3ed4-4d59-8f15-9ee2a14b0fd6">
+      UpgradeCode="09f89a11-3ed4-4d59-8f15-9ee2a14b0fd6"
+      Compressed="yes"
+      InstallerVersion="500">
+
+    <!-- Media definition - embed CAB in MSI -->
+    <Media Id="1" Cabinet="data.cab" EmbedCab="yes" />
 
     <!-- Feature must be inside Package in WiX v4+ -->
     <Feature Id="MainFeature" Title="KMC Browser DNS Policies" Level="1">
